@@ -3,11 +3,14 @@ package com.mycompany.lpoofinal.modelo.rn;
 import java.util.List;
 
 import lpoo.estudiodanca.modelo.dao.GenericDao;
+import lpoo.estudiodanca.modelo.vo.Contato;
+import lpoo.estudiodanca.modelo.vo.Funcionario;
+import lpoo.estudiodanca.modelo.vo.Turma;
 
-public class Turmas {
+public class TurmasRN {
     private GenericDao<Turma> genericDao;
 
-    public TurmaRN() {
+    public void TurmaRN() {
         genericDao = new GenericDao<Turma>();
     }
 

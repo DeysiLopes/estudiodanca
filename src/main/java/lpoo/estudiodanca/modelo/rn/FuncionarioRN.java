@@ -1,8 +1,10 @@
-package com.mycompany.lpoofinal.modelo.rn;
+package lpoo.estudiodanca.modelo.rn;
 
 import java.util.List;
 
 import lpoo.estudiodanca.modelo.dao.GenericDao;
+import lpoo.estudiodanca.modelo.vo.Contato;
+import lpoo.estudiodanca.modelo.vo.Funcionario;
 
 public class FuncionarioRN {
 

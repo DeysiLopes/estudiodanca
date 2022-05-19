@@ -3,6 +3,7 @@ package com.mycompany.lpoofinal.modelo.rn;
 import java.util.List;
 
 import lpoo.estudiodanca.modelo.dao.GenericDao;
+import lpoo.estudiodanca.modelo.vo.Login;
 
 public class LoginRN {
     

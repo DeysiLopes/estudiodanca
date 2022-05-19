@@ -3,6 +3,7 @@ package lpoo.estudiodanca.modelo.rn;
 import java.util.List;
 
 import lpoo.estudiodanca.modelo.dao.GenericDao;
+import lpoo.estudiodanca.modelo.vo.Contato;
 import lpoo.estudiodanca.modelo.vo.Estudante;
 
 public class EstudanteRN {
@@ -10,7 +11,7 @@ public class EstudanteRN {
     private GenericDao<Estudante> genericDao;
 
     public EstudanteRN(){
-        genericDao = new GenericDao<>();
+        genericDao = new GenericDao<Estudante>();
     }
 
     public void gravar(Estudante estudante){
@@ -42,6 +43,7 @@ public class EstudanteRN {
             genericDao.getManager().persist(contato);
             estudante.addContato(contato);
         });
+    }
 
         public void remover(Estudante estudante){
             genericDao.delete(estudante);
@@ -65,7 +67,7 @@ public class EstudanteRN {
         }
         public List buscar(String nome, String nomePessoa){
             try {
-                return genericDao.search(nome, nomePessoa, Estudante.class)
+                return genericDao.search(nome, nomePessoa, Estudante.class);
             } catch (Exception e) {
                 return null;
             }

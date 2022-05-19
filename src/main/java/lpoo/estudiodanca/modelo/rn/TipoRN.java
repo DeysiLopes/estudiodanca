@@ -1,8 +1,10 @@
-package com.mycompany.lpoofinal.modelo.rn;
+package lpoo.estudiodanca.modelo.rn;
 
 import java.util.List;
 
 import lpoo.estudiodanca.modelo.dao.GenericDao;
+import lpoo.estudiodanca.modelo.vo.Funcionario;
+import lpoo.estudiodanca.modelo.vo.Tipo;
 
 public class TipoRN {
 
@@ -46,7 +48,7 @@ public class TipoRN {
         }
     }
 
-    public Tipo buscar(Long id) {
+    public Funcionario buscar(Long id) {
         try {
             return genericDao.search(Tipo.class, id);
         } catch (Exception e) {

@@ -5,6 +5,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import lpoo.estudiodanca.modelo.vo.Funcionario;
+
 public class GenericDao<T> implements iGenericDao<T> {
 
 	EntityManager manager = ConexaoHibernate.getInstance();

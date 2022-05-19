@@ -29,7 +29,7 @@ public class Estudante {
     private String getNome(){
         return nome;
     }
-    private String setNome(){
+    private void setNome(){
         this.nome = nome;
     }
 
