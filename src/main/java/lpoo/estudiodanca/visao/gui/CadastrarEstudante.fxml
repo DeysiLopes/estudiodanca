@@ -6,21 +6,20 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lpoo.estudiodanca.visao.gui.CadastrarEstudanteController">
    <content>
       <VBox prefHeight="350.0" prefWidth="452.0">
          <children>
             <MenuBar>
               <menus>
-                <Menu mnemonicParsing="false" text="Registrar">
+                <Menu fx:id="menuItemEstudante" mnemonicParsing="false" onAction="#onMenuItemEstudanteAction" text="Registrar">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="Professor" />
-                        <MenuItem mnemonicParsing="false" text="Aluno" />
+                        <MenuItem mnemonicParsing="false" text="Estudante" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                   <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
+                    <MenuItem fx:id="menuItemAbout" mnemonicParsing="false" onAction="#onMenuItemAboutAction" text="About" />
                   </items>
                 </Menu>
               </menus>
