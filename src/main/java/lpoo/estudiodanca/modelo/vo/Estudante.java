@@ -24,24 +24,24 @@ public class Estudante implements Serializable{
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo")
-    private Long cod;
+    private Long id;
     private String nome;
     
     public Estudante(Long cod, String nome) {
-		this.cod = cod;
+		this.id = cod;
 		this.nome = nome;
 	}
 
     
 
 	public Long getCod() {
-		return cod;
+		return id;
 	}
 
 
 
 	public void setCod(Long cod) {
-		this.cod = cod;
+		this.id = cod;
 	}
 
 
