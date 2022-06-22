@@ -48,7 +48,7 @@ public class TipoRN {
         }
     }
 
-    public Funcionario buscar(Long id) {
+    public Tipo buscar(Long id) {
         try {
             return genericDao.search(Tipo.class, id);
         } catch (Exception e) {

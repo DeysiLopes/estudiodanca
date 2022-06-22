@@ -19,7 +19,7 @@ public class Contato {
     private String email;
 
     @ManyToOne
-    private Pessoa pessoa;
+    private Funcionario funcionario;
 
     public Long getId() {
         return id;
@@ -53,12 +53,14 @@ public class Contato {
         this.email = email;
     }
 
-    public Pessoa getPessoa() {
-        return pessoa;
-    }
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
 
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
+
+    
 }
     

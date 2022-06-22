@@ -1,4 +1,4 @@
-package com.mycompany.lpoofinal.modelo.rn;
+package lpoo.estudiodanca.modelo.rn;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class LoginRN {
         return genericDao.listAll(Login.class);
     }
 
-    public Login buscar(String login) {
+    public Login buscar(Long login) {
         try {
             return genericDao.listOne("usuario", login, Login.class);
         } catch (Exception e) {

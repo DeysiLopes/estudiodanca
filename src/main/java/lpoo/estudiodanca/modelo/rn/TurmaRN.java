@@ -54,7 +54,7 @@ public class TurmaRN {
         }
     }
 
-    public Funcionario buscar(Long id) {
+    public Turma buscar(Long id) {
         try {
             return genericDao.search(Turma.class, id);
         } catch (Exception e) {
