@@ -26,7 +26,7 @@ public class CadastrarEstudanteController implements Initializable{
 	
 	@FXML
 	public void onMenuItemEstudanteAction() {
-		System.out.println("onMenuItemEstudanteAction");
+		loadView("/lpoo/estudiodanca/visao/gui/EstudanteList.fxml");
 	}
 	
 	@FXML
