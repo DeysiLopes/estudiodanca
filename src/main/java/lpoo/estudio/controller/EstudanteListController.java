@@ -1,4 +1,4 @@
-package lpoo.estudiodanca.visao.gui;
+package lpoo.estudio.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;

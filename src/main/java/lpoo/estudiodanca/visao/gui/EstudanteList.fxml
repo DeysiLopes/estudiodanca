@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="265.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lpoo.estudiodanca.visao.gui.EstudanteListController">
+<VBox prefHeight="265.0" prefWidth="430.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lpoo.estudio.controller.EstudanteListController">
    <children>
       <Label text="Estudante Registration">
          <font>
