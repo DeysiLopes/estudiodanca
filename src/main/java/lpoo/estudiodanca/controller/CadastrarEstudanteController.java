@@ -3,6 +3,7 @@ package lpoo.estudiodanca.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,12 +28,15 @@ public class CadastrarEstudanteController implements Initializable{
 	
 	@FXML
 	public void onMenuItemEstudanteAction() {
-		loadView2("/lpoo/estudiodanca/visao/gui/EstudanteList.fxml");
+		loadView("/lpoo/estudiodanca/visao/gui/EstudanteList.fxml", (EstudanteListController controller)-> {
+			controller.setEstudanteService(new EstudanteService());
+			controller.updateTableView();
+		});
 	}
 	
 	@FXML
 	public void onMenuItemAboutAction() {
-		loadView("/lpoo/estudiodanca/visao/gui/About.fxml");
+		loadView("/lpoo/estudiodanca/visao/gui/About.fxml", x -> {});
 	}
 	
 	@Override
@@ -40,7 +44,7 @@ public class CadastrarEstudanteController implements Initializable{
 
 	}
 	
-	private void loadView(String absoluteName) {
+	private synchronized <T> void loadView(String absoluteName, Consumer<T> initializingAction) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 			VBox newVBox = loader.load();
@@ -52,32 +56,14 @@ public class CadastrarEstudanteController implements Initializable{
 			mainVBox.getChildren().clear();
 			mainVBox.getChildren().add(mainMenu);
 			mainVBox.getChildren().addAll(newVBox.getChildren());
+			
+			T controller = loader.getController();
+			initializingAction.accept(controller);
 			
 		} catch (IOException e) {
 			throw new Error(e.getMessage());
 		}
 	}
 	
-	private void loadView2(String absoluteName) {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
-			VBox newVBox = loader.load();
-			
-			Scene mainScene = Main.getMainScene();
-			VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent();
-			
-			Node mainMenu = mainVBox.getChildren().get(0);
-			mainVBox.getChildren().clear();
-			mainVBox.getChildren().add(mainMenu);
-			mainVBox.getChildren().addAll(newVBox.getChildren());
-			
-			EstudanteListController controller = loader.getController();
-			controller.setEstudanteService(new EstudanteService());
-			controller.updateTableView();
-			
-		} catch (IOException e) {
-			throw new Error(e.getMessage());
-		}
-	}
 	
 }
