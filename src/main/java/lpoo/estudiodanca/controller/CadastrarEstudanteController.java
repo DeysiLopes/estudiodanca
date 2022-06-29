@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
+import lpoo.estudiodanca.modelo.services.EstudanteService;
 import lpoo.estudiodanca.principal.Main;
 
 public class CadastrarEstudanteController implements Initializable{
@@ -26,7 +27,7 @@ public class CadastrarEstudanteController implements Initializable{
 	
 	@FXML
 	public void onMenuItemEstudanteAction() {
-		loadView("/lpoo/estudiodanca/visao/gui/EstudanteList.fxml");
+		loadView2("/lpoo/estudiodanca/visao/gui/EstudanteList.fxml");
 	}
 	
 	@FXML
@@ -51,6 +52,28 @@ public class CadastrarEstudanteController implements Initializable{
 			mainVBox.getChildren().clear();
 			mainVBox.getChildren().add(mainMenu);
 			mainVBox.getChildren().addAll(newVBox.getChildren());
+			
+		} catch (IOException e) {
+			throw new Error(e.getMessage());
+		}
+	}
+	
+	private void loadView2(String absoluteName) {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+			VBox newVBox = loader.load();
+			
+			Scene mainScene = Main.getMainScene();
+			VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent();
+			
+			Node mainMenu = mainVBox.getChildren().get(0);
+			mainVBox.getChildren().clear();
+			mainVBox.getChildren().add(mainMenu);
+			mainVBox.getChildren().addAll(newVBox.getChildren());
+			
+			EstudanteListController controller = loader.getController();
+			controller.setEstudanteService(new EstudanteService());
+			controller.updateTableView();
 			
 		} catch (IOException e) {
 			throw new Error(e.getMessage());

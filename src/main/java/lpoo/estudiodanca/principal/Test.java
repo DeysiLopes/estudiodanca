@@ -10,9 +10,9 @@ public class Test {
 
 	public static void main(String[] args) {
 		
-		Estudante es4 = new Estudante(null, "jonas");
-		Estudante es5 = new Estudante(null, "joana");
-		Estudante es6 = new Estudante(null, "joao");
+		Estudante es4 = new Estudante((Integer) null, "jonas");
+		Estudante es5 = new Estudante((Integer) null, "joana");
+		Estudante es6 = new Estudante((Integer) null, "joao");
 		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("exemplo-jpa");
 		EntityManager em = emf.createEntityManager();

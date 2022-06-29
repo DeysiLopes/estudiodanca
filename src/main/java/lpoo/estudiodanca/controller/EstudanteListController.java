@@ -1,8 +1,11 @@
 package lpoo.estudiodanca.controller;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -10,11 +13,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import lpoo.estudiodanca.modelo.services.EstudanteService;
 import lpoo.estudiodanca.modelo.vo.Estudante;
 import lpoo.estudiodanca.principal.Main;
 
 public class EstudanteListController implements Initializable {
 
+	private EstudanteService service;
+	
 	@FXML
 	private TableView<Estudante> tableViewEstudantes;
 	
@@ -25,9 +31,15 @@ public class EstudanteListController implements Initializable {
 	@FXML
 	private Button btnNew;
 	
+	private ObservableList<Estudante> obsList;
+	
 	@FXML
 	public void onBtnNewAction() {
 		System.out.println("Botão ta on BB!!");
+	}
+	
+	public void setEstudanteService(EstudanteService service) {
+		this.service = service;
 	}
 	
 	@Override
@@ -41,6 +53,15 @@ public class EstudanteListController implements Initializable {
 		
 		Stage stage = (Stage) Main.getMainScene().getWindow();
 		tableViewEstudantes.prefHeightProperty().bind(stage.heightProperty());
+	}
+	
+	public void updateTableView() {
+		if(service == null) {
+			throw new IllegalStateException("SERVICE WAS NULL");
+		}
+		List <Estudante> list = service.findAll();
+		obsList = FXCollections.observableArrayList(list);
+		tableViewEstudantes.setItems(obsList);
 	}
 
 }
