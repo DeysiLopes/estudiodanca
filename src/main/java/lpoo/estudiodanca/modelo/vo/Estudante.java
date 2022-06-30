@@ -27,12 +27,19 @@ public class Estudante implements Serializable{
     private int id;
     private String nome;
     
+    private Turma turma;
     
+	
 
- 
-	public Estudante(int id, String nome) {
+	public Estudante(int id, String nome, Turma turma) {
 		this.id = id;
 		this.nome = nome;
+		this.turma = turma;
+	}
+
+
+	public Estudante() {
+		
 	}
 
 
@@ -55,9 +62,15 @@ public class Estudante implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
+	
 
-	public void addContato(Contato contato) {
-		// TODO Auto-generated method stub
-		
+	public Turma getTurma() {
+		return turma;
+	}
+
+
+	public void setTurma(Turma turma) {
+		this.turma = turma;
 	}
 }

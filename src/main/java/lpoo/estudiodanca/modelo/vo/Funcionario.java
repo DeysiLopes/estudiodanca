@@ -25,95 +25,52 @@ public class Funcionario implements Serializable {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "codigo")
-    private Long cod;
+    private Integer id;
     private String nome;
     private String cpf;
-    private String rg;
-
-    //@Temporal(TemporalType.DATE)
-    private String dataNascimento;
-
-    @OneToMany(mappedBy = "funcionario", targetEntity = Contato.class, cascade = CascadeType.ALL)
-    private List<Contato> contatos;    
-    private String sexo;
-
-
-    @Embedded
-    @OneToOne(targetEntity = Endereco.class, cascade = CascadeType.ALL)
-    private Endereco endereco;
-
+    
+    private Turma turma;
+    
     public Funcionario() {
-        this.contatos = new ArrayList<Contato>();
+  
     }
+    
+	
+	
+	public Funcionario(Integer id, String nome, String cpf, Turma turma) {
+		this.id = id;
+		this.nome = nome;
+		this.cpf = cpf;
+		this.turma = turma;
+	}
 
-    public Long getCod() {
-        return cod;
-    }
 
-    public void setCod(Long cod) {
-        this.cod = cod;
-    }
 
-    public String getNome() {
-        return nome;
-    }
+	public Turma getTurma() {
+		return turma;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public void setTurma(Turma turma) {
+		this.turma = turma;
+	}
 
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getRg() {
-        return rg;
-    }
-
-    public void setRg(String rg) {
-        this.rg = rg;
-    }
-
-    public String getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(String dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-
-    public List<Contato> getContato() {
-        return contatos;
-    }
-
-    public void addContato(Contato contato) {
-        if (!getContato().contains(contato)) {
-            this.contatos.add(contato);
-            if (contato.getFuncionario() != null) {
-                contato.getFuncionario().getContato().remove(contato);
-            }
-            contato.setFuncionario(this);
-        }
-    }
-
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public String getCpf() {
+		return cpf;
+	}
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}    
     
 }

@@ -5,13 +5,13 @@ import java.util.List;
 
 import lpoo.estudiodanca.modelo.vo.Estudante;
 
-public class EstudanteService {
+public class EstudanteService<T> {
 	
 	public List<Estudante> findAll(){
-			List<Estudante> list = new ArrayList<>();
-			list.add(new Estudante(1, "Deysi"));
-			list.add(new Estudante(2, "Debora"));
-			list.add(new Estudante(3, "Luana"));
-			return list;
-	}
+		List<Estudante> list = new ArrayList<>();
+		list.add(new Estudante(1, "Deysi", null));
+		list.add(new Estudante(2, "Debora", null));
+		list.add(new Estudante(3, "Luana", null));
+		return list;
+}
 }

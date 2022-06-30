@@ -1,46 +1,52 @@
 package lpoo.estudiodanca.modelo.vo;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 @Entity
 @Table(name = "tb_turma")
 public class Turma {
-    @Id
-    int codigo;
-    String nome;
-    Double valor;
+	@Id
+	int id;
+	String nome;
+	Date horario;
 
-    public Turma(int codigo, String nome, Double valor) {
-        this.codigo = codigo;
-        this.nome = nome;
-        this.valor = valor;
-    }
+	public Turma(int id, String nome, Date horario) {
+		this.id = id;
+		this.nome = nome;
+		this.horario = horario;
+	}
 
-    public int getCodigo() {
-        return codigo;
-    }
+	public Turma() {
+	}
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public Double getValor() {
-        return valor;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	
+	//@Temporal(value = null)
+	public Date getHorario() {
+		return horario;
+	}
 
-    public void setValor(Double valor) {
-        this.valor = valor;
-    }
-    
-    
+	public void setHorario(Date horario) {
+		this.horario = horario;
+	}
+
 }
