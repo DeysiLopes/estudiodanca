@@ -29,6 +29,9 @@ public class EstudanteListController implements Initializable {
 	@FXML
 	private TableColumn<Estudante, String> tableColomnName;
 	@FXML
+	private TableColumn<Estudante, Long> tableColomnTurmaId;
+	
+	@FXML
 	private Button btnNew;
 	
 	private ObservableList<Estudante> obsList;
@@ -50,6 +53,7 @@ public class EstudanteListController implements Initializable {
 	private void initializeNodes() {
 		tableColomnId.setCellValueFactory(new PropertyValueFactory<>("id"));
 		tableColomnName.setCellValueFactory(new PropertyValueFactory<>("nome"));
+		tableColomnTurmaId.setCellValueFactory(new PropertyValueFactory<>("TurmaId"));
 		
 		Stage stage = (Stage) Main.getMainScene().getWindow();
 		tableViewEstudantes.prefHeightProperty().bind(stage.heightProperty());

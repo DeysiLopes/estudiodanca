@@ -1,5 +1,6 @@
 package lpoo.estudiodanca.modelo.vo;
 
+import java.sql.Time;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -24,25 +25,15 @@ public class Turma {
 	String nome;
 	
 	@Column
-	Date horario;
-
-	@Column
-	Funcionario fun;
+	Time horario;
 
 	
-	public Turma(int id, String nome, Date horario, Funcionario fun) {
+	
+	
+	public Turma(int id, String nome, Time horario) {
 		this.id = id;
 		this.nome = nome;
 		this.horario = horario;
-		this.fun = fun;
-	}
-
-	public Funcionario getFun() {
-		return fun;
-	}
-
-	public void setFun(Funcionario fun) {
-		this.fun = fun;
 	}
 
 	public Turma() {
@@ -63,15 +54,16 @@ public class Turma {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	//@Temporal(value = null)
-	public Date getHorario() {
+
+	public Time getHorario() {
 		return horario;
 	}
 
-	public void setHorario(Date horario) {
+	public void setHorario(Time horario) {
 		this.horario = horario;
 	}
+	
+	
 
 
 }

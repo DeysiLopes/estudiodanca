@@ -40,8 +40,6 @@ public class Funcionario implements Serializable {
   
     }
     
-	
-	
 	public Funcionario(Integer id, String nome, String cpf, Turma turma) {
 		this.id = id;
 		this.nome = nome;

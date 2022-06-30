@@ -28,17 +28,24 @@ public class Estudante implements Serializable{
     private int id;
 	@Column
     private String nome;
-    @OneToMany
-    private Turma turma;
-    
+	@Column
+    private Turma TurmaId;
+	
 	
 
-	public Estudante(int id, String nome, Turma turma) {
+	public Estudante(int id, String nome, Turma TurmaId) {
 		this.id = id;
 		this.nome = nome;
-		this.turma = turma;
+		this.TurmaId = TurmaId;
 	}
 
+	public Turma getTurmaId() {
+		return TurmaId;
+	}
+
+	public void setTurmaId(Turma turma) {
+		this.TurmaId = TurmaId;
+	}
 
 	public Estudante() {
 		
@@ -64,14 +71,4 @@ public class Estudante implements Serializable{
 		this.nome = nome;
 	}
 	
-	
-
-	public Turma getTurma() {
-		return turma;
-	}
-
-
-	public void setTurma(Turma turma) {
-		this.turma = turma;
-	}
 }

@@ -58,7 +58,10 @@ public class EstudanteDaoImpl implements EstudanteDao {
 	public void update(Estudante obj) {
 		PreparedStatement st = null;
 		try {
-			st = conn.prepareStatement("UPDATE tb_estudante " + "SET nome = ?" + "WHERE Id = ?");
+			st = conn.prepareStatement(
+					"UPDATE tb_estudante " 
+							+ "SET nome = ?" 
+							+ "WHERE Id = ?");
 
 			st.setString(1, obj.getNome());
 			st.setInt(2, obj.getId());
@@ -90,87 +93,7 @@ public class EstudanteDaoImpl implements EstudanteDao {
 		}
 
 	}
-
-	public Estudante findById(Integer id) {
-		PreparedStatement st = null;
-		ResultSet rs = null;
-
-		try {
-			st = conn.prepareStatement(
-					"SELECT tb_turma.*,tb_funcionario.nome as TurFuncionario " 
-							+ "FROM tb_turma INNER JOIN tb_funcionario "
-							+ "ON tb_turma.tb_funcionarioId = tb_funcionario.Id " 
-							+ "WHERE tb_turma.Id = ?");
-			st.setInt(1, id);
-			rs = st.executeQuery();
-			if (rs.next()) {
-				Turma tur = instantiateTurma(rs);
-				Estudante obj = instantiateEstudante(rs, tur);
-				return obj;
-			}
-			return null;
-
-		} catch (SQLException e) {
-			throw new DbException(e.getMessage());
-
-		} finally {
-			DB.closeStatement(st);
-			DB.closeResultSet(rs);
-		}
-	}
-
-	private Estudante instantiateEstudante(ResultSet rs, Turma tur) throws SQLException {
-		Estudante obj = new Estudante();
-		obj.setId(rs.getInt("Id"));
-		obj.setNome(rs.getString("Nome"));
-		obj.setTurma(tur);
-		return obj;
-	}
-
-	private Turma instantiateTurma(ResultSet rs) throws SQLException {
-		Turma tur = new Turma();
-		tur.setId(rs.getInt("TurmaId"));
-		tur.setNome(rs.getString("TurNome"));
-		return tur;
-	}
-
-	public List<Estudante> findAll() {
-		PreparedStatement st = null;
-		ResultSet rs = null;
-
-		try {
-			st = conn.prepareStatement(
-					"SELECT tb_estudante.*,tb_turma.nome as EstTurma " 
-							+ "FROM tb_estudante INNER JOIN tb_turma "
-							+ "ON tb_estudante.TurmaId = tb_turma.Id " 
-							+ "ORDER BY nome");
-
-			rs = st.executeQuery();
-
-			List<Estudante> list = new ArrayList<>();
-			Map<Integer, Turma> map = new HashMap<>();
-
-			while (rs.next()) {
-				Turma tur = map.get(rs.getInt("TurmaId"));
-
-				if (tur == null) {
-					tur = instantiateTurma(rs);
-					map.put(rs.getInt("TurmaId"), tur);
-				}
-				Estudante obj = instantiateEstudante(rs, tur);
-				list.add(obj);
-			}
-			return list;
-
-		} catch (SQLException e) {
-			throw new DbException(e.getMessage());
-
-		} finally {
-			DB.closeStatement(st);
-			DB.closeResultSet(rs);
-		}
-	}
-
+	
 	@Override
 	public List<Estudante> findByTurma(Turma turma) {
 		PreparedStatement st = null;
@@ -209,6 +132,85 @@ public class EstudanteDaoImpl implements EstudanteDao {
 			DB.closeStatement(st);
 			DB.closeResultSet(rs);
 		}
+	
 	}
+	
+	@Override
+	public Estudante findById(Integer id) {
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement(
+				"SELECT * FROM department WHERE id = ?");
+			st.setInt(1, id);
+			rs = st.executeQuery();
+			if (rs.next()) {
+				Estudante obj = new Estudante();
+				obj.setId(rs.getInt("id"));
+				obj.setNome(rs.getString("nome"));
+				return obj;
+			}
+			return null;
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
+	}
+	private Estudante instantiateEstudante(ResultSet rs, Turma tur) throws SQLException {
+		Estudante obj = new Estudante();
+		obj.setId(rs.getInt("Id"));
+		obj.setNome(rs.getString("Nome"));
+		obj.setTurmaId(tur);
+		return obj;
+	}
+
+	private Turma instantiateTurma(ResultSet rs) throws SQLException {
+		Turma tur = new Turma();
+		tur.setId(rs.getInt("TurmaId"));
+		return tur;
+	}
+
+	@Override
+	public List<Estudante> findAll() {
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement(
+				"SELECT * FROM tb_estudante ORDER BY TurmaId");
+			rs = st.executeQuery();
+
+			List<Estudante> list = new ArrayList<>();
+			Map<Integer, Turma> map = new HashMap<>();
+
+			while (rs.next()) {
+				Turma tur = map.get(rs.getInt("TurmaId"));
+
+				if (tur == null) {
+					tur = instantiateTurma(rs);
+					map.put(rs.getInt("TurmaId"), tur);
+				}
+				Estudante obj = new Estudante();
+				obj.setId(rs.getInt("id"));
+				obj.setNome(rs.getString("nome"));
+				obj.setTurmaId(tur);
+				list.add(obj);
+			}
+			return list;
+		}
+		catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		}
+		finally {
+			DB.closeStatement(st);
+			DB.closeResultSet(rs);
+		}
+	}
+
+	
+
 
 }

@@ -3,6 +3,7 @@ package lpoo.estudiodanca.modelo.dao;
 import java.util.List;
 
 import lpoo.estudiodanca.modelo.vo.Estudante;
+import lpoo.estudiodanca.modelo.vo.Funcionario;
 import lpoo.estudiodanca.modelo.vo.Turma;
 
 public interface EstudanteDao {

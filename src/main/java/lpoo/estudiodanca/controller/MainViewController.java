@@ -14,6 +14,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import lpoo.estudiodanca.modelo.services.EstudanteService;
+import lpoo.estudiodanca.modelo.services.TurmaService;
 import lpoo.estudiodanca.principal.Main;
 
 public class MainViewController implements Initializable{
@@ -46,7 +47,7 @@ public class MainViewController implements Initializable{
 	
 	@FXML
 	public void onMenuItemTurmaAction() {
-		loadView("/lpoo/estudiodanca/visao/gui/TurmaList.fxml", x -> {});
+		loadView("/lpoo/estudiodanca/visao/gui/TurmaList.fxml",  x -> {});
 	}
 	
 	@FXML

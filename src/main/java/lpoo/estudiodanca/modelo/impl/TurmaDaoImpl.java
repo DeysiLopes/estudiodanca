@@ -67,7 +67,10 @@ public class TurmaDaoImpl implements TurmaDao {
 	public void update(Turma obj) {
 		PreparedStatement st = null;
 		try {
-			st = conn.prepareStatement("UPDATE tb_estudante " + "SET nome = ?" + "WHERE Id = ?");
+			st = conn.prepareStatement(
+					"UPDATE tb_estudante " 
+							+ "SET nome = ?" 
+							+ "WHERE Id = ?");
 
 			st.setString(1, obj.getNome());
 			st.setInt(2, obj.getId());
@@ -101,46 +104,23 @@ public class TurmaDaoImpl implements TurmaDao {
 		
 	}
 
-	private Turma instantiateTurma(ResultSet rs, Funcionario fun) throws SQLException {
-		Turma obj = new Turma();
-		obj.setId(rs.getInt("Id"));
-		obj.setNome(rs.getString("Nome"));
-		obj.setFun(fun);
-		return obj;
-	}
-
-	private Funcionario instantiateFuncionario(ResultSet rs) throws SQLException {
-		Funcionario tur = new Funcionario();
-		tur.setId(rs.getInt("FuncionarioId"));
-		tur.setNome(rs.getString("FunNome"));
-		return tur;
-	}
-
 	@Override
 	public List<Turma> findAll() {
 		PreparedStatement st = null;
 		ResultSet rs = null;
 
 		try {
-			st = conn.prepareStatement(
-					"SELECT tb_turma.*,tb_funcionario.nome as TurFuncionario " 
-							+ "FROM tb_turma INNER JOIN tb_funcionario "
-							+ "ON tb_turma.FuncionarioId = tb_funcionario.Id " 
-							+ "ORDER BY nome");
+			st = conn.prepareStatement("SELECT * FROM department ORDER BY Name ");
 
 			rs = st.executeQuery();
 
 			List<Turma> list = new ArrayList<>();
-			Map<Integer,Funcionario> map = new HashMap<>();
 
 			while (rs.next()) {
-				Funcionario fun = map.get(rs.getInt("FuncionarioId"));
-
-				if (fun == null) {
-					fun = instantiateFuncionario(rs);
-					map.put(rs.getInt("FuncionarioId"), fun);
-				}
-				Turma obj = instantiateTurma(rs, fun);
+				Turma obj = new Turma();
+				obj.setId(rs.getInt("Id"));
+				obj.setNome(rs.getString("Name"));
+				obj.setHorario(rs.getTime("horario"));
 				list.add(obj);
 			}
 			return list;
