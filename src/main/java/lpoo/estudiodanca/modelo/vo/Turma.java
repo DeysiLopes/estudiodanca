@@ -2,19 +2,31 @@ package lpoo.estudiodanca.modelo.vo;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 
 @Entity
 @Table(name = "tb_turma")
 public class Turma {
-	@Id
-	int id;
-	String nome;
-	Date horario;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	int id;
+	
+	@Column
+	String nome;
+	
+	@Column
+	Date horario;
+
+	@Column
 	Funcionario fun;
 
 	

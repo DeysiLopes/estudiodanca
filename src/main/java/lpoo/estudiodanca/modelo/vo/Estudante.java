@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,10 +24,11 @@ public class Estudante implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo")
+    @Column(name = "id")
     private int id;
+	@Column
     private String nome;
-    
+    @OneToMany
     private Turma turma;
     
 	
@@ -41,7 +43,6 @@ public class Estudante implements Serializable{
 	public Estudante() {
 		
 	}
-
 
 	public int getId() {
 		return id;

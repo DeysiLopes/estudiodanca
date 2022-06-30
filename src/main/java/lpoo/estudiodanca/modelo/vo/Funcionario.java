@@ -24,11 +24,16 @@ public class Funcionario implements Serializable {
     private static final long serialVersionUID = 1L;
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "codigo")
+    @Column(name = "id")
     private Integer id;
+	
+	@Column
     private String nome;
+	
+	@Column
     private String cpf;
     
+	@Column
     private Turma turma;
     
     public Funcionario() {

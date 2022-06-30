@@ -21,9 +21,13 @@ public class TurmaDaoImpl implements TurmaDao {
 	
 	private Connection conn;
 
-	public Connection getConnection() {
-		return conn;
+	public TurmaDaoImpl(Connection conn) {
+		this.conn = conn;
 	}
+
+//	public Connection getConnection() {
+//		return conn;
+//	}
 
 	@Override
 	public void insert(Turma obj) {
@@ -96,37 +100,6 @@ public class TurmaDaoImpl implements TurmaDao {
 		}
 		
 	}
-
-	@Override
-	public Turma findById(Integer id) {
-		PreparedStatement st = null;
-		ResultSet rs = null;
-
-		try {
-			st = conn.prepareStatement(
-					"SELECT tb_estudante.*,tb_turma.nome as EstTurma " 
-							+ "FROM tb_estudante INNER JOIN tb_turma "
-							+ "ON tb_estudante.tb_turmaId = tb_turma.Id " 
-							+ "WHERE tb_estudante.Id = ?");
-			st.setInt(1, id);
-			rs = st.executeQuery();
-			if (rs.next()) {
-				Funcionario fun = instantiateFuncionario(rs);
-				Turma obj = instantiateTurma(rs, fun);
-				return obj;
-			}
-			return null;
-
-		} catch (SQLException e) {
-			throw new DbException(e.getMessage());
-
-		} finally {
-			DB.closeStatement(st);
-			DB.closeResultSet(rs);
-		}
-	}
-
-
 
 	private Turma instantiateTurma(ResultSet rs, Funcionario fun) throws SQLException {
 		Turma obj = new Turma();

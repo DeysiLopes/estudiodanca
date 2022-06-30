@@ -20,8 +20,12 @@ public class EstudanteDaoImpl implements EstudanteDao {
 	
 	private Connection conn;
 
-	public Connection getConnection() {
-		return conn;
+//	public Connection getConnection() {
+//		return conn;
+//	}
+	
+	public EstudanteDaoImpl(Connection conn) {
+		this.conn = conn;
 	}
 
 	public void insert(Estudante obj) {
@@ -137,7 +141,7 @@ public class EstudanteDaoImpl implements EstudanteDao {
 		try {
 			st = conn.prepareStatement(
 					"SELECT tb_estudante.*,tb_turma.nome as EstTurma " 
-							+ "FROM tb_estudante INNER JOIN tb_turmat "
+							+ "FROM tb_estudante INNER JOIN tb_turma "
 							+ "ON tb_estudante.TurmaId = tb_turma.Id " 
 							+ "ORDER BY nome");
 

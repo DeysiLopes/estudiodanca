@@ -21,9 +21,13 @@ public class FuncionarioDaoImpl implements FuncionarioDao {
 	
 	private Connection conn;
 
-	public Connection getConnection() {
-		return conn;
+	public FuncionarioDaoImpl(Connection conn) {
+		this.conn = conn;
 	}
+
+//	public Connection getConnection() {
+//		return conn;
+//	}
 
 	@Override
 	public void insert(Funcionario obj) {
