@@ -16,12 +16,18 @@ import javafx.scene.layout.VBox;
 import lpoo.estudiodanca.modelo.services.EstudanteService;
 import lpoo.estudiodanca.principal.Main;
 
-public class CadastrarEstudanteController implements Initializable{
+public class MainViewController implements Initializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	@FXML
 	private MenuItem menuItemEstudante;
+	
+	@FXML
+	private MenuItem menuItemFuncionario;
+	
+	@FXML
+	private MenuItem menuItemTurma;
 	
 	@FXML
 	private MenuItem menuItemAbout;
@@ -32,6 +38,15 @@ public class CadastrarEstudanteController implements Initializable{
 			controller.setEstudanteService(new EstudanteService());
 			controller.updateTableView();
 		});
+	}
+	@FXML
+	public void onMenuItemFuncionarioAction() {
+		loadView("/lpoo/estudiodanca/visao/gui/FuncionarioList.fxml", x -> {});
+	}
+	
+	@FXML
+	public void onMenuItemTurmaAction() {
+		loadView("/lpoo/estudiodanca/visao/gui/TurmaList.fxml", x -> {});
 	}
 	
 	@FXML

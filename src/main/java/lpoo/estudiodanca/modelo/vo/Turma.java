@@ -14,11 +14,23 @@ public class Turma {
 	int id;
 	String nome;
 	Date horario;
+	
+	Funcionario fun;
 
-	public Turma(int id, String nome, Date horario) {
+	
+	public Turma(int id, String nome, Date horario, Funcionario fun) {
 		this.id = id;
 		this.nome = nome;
 		this.horario = horario;
+		this.fun = fun;
+	}
+
+	public Funcionario getFun() {
+		return fun;
+	}
+
+	public void setFun(Funcionario fun) {
+		this.fun = fun;
 	}
 
 	public Turma() {
@@ -48,5 +60,6 @@ public class Turma {
 	public void setHorario(Date horario) {
 		this.horario = horario;
 	}
+
 
 }

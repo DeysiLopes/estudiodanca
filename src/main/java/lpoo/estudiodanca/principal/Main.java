@@ -15,7 +15,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage stage) {
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/lpoo/estudiodanca/visao/gui/CadastrarEstudante.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/lpoo/estudiodanca/visao/gui/MainView.fxml"));
 			ScrollPane scrollPane = loader.load();
 			
 			scrollPane.setFitToHeight(true);

@@ -93,10 +93,10 @@ public class EstudanteDaoImpl implements EstudanteDao {
 
 		try {
 			st = conn.prepareStatement(
-					"SELECT tb_estudante.*,tb_turma.nome as EstTurma " 
-							+ "FROM tb_estudante INNER JOIN tb_turma "
-							+ "ON tb_estudante.tb_turmaId = tb_turma.Id " 
-							+ "WHERE tb_estudante.Id = ?");
+					"SELECT tb_turma.*,tb_funcionario.nome as TurFuncionario " 
+							+ "FROM tb_turma INNER JOIN tb_funcionario "
+							+ "ON tb_turma.tb_funcionarioId = tb_funcionario.Id " 
+							+ "WHERE tb_turma.Id = ?");
 			st.setInt(1, id);
 			rs = st.executeQuery();
 			if (rs.next()) {
