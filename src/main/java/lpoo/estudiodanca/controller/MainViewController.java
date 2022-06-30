@@ -47,7 +47,10 @@ public class MainViewController implements Initializable{
 	
 	@FXML
 	public void onMenuItemTurmaAction() {
-		loadView("/lpoo/estudiodanca/visao/gui/TurmaList.fxml",  x -> {});
+		loadView("/lpoo/estudiodanca/visao/gui/TurmaList.fxml",  (TurmaListController controller) -> {
+			controller.setTurmaService(new TurmaService());
+			controller.updateTableView();
+		});
 	}
 	
 	@FXML
