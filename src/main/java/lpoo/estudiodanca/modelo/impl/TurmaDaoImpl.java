@@ -110,7 +110,7 @@ public class TurmaDaoImpl implements TurmaDao {
 		ResultSet rs = null;
 
 		try {
-			st = conn.prepareStatement("SELECT * FROM department ORDER BY Name ");
+			st = conn.prepareStatement("SELECT * FROM tb_turma ORDER BY id ");
 
 			rs = st.executeQuery();
 
@@ -118,8 +118,8 @@ public class TurmaDaoImpl implements TurmaDao {
 
 			while (rs.next()) {
 				Turma obj = new Turma();
-				obj.setId(rs.getInt("Id"));
-				obj.setNome(rs.getString("Name"));
+				obj.setId(rs.getInt("id"));
+				obj.setNome(rs.getString("nome"));
 				obj.setHorario(rs.getTime("horario"));
 				list.add(obj);
 			}
