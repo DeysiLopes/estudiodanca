@@ -25,12 +25,12 @@ public class Turma {
 	String nome;
 	
 	@Column
-	Time horario;
+	String horario;
 
 	
 	
 	
-	public Turma(int id, String nome, Time horario) {
+	public Turma(int id, String nome, String horario) {
 		this.id = id;
 		this.nome = nome;
 		this.horario = horario;
@@ -55,11 +55,11 @@ public class Turma {
 		this.nome = nome;
 	}
 
-	public Time getHorario() {
+	public String getHorario() {
 		return horario;
 	}
 
-	public void setHorario(Time horario) {
+	public void setHorario(String horario) {
 		this.horario = horario;
 	}
 	

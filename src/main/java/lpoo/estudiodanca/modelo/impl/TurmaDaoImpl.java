@@ -41,7 +41,7 @@ public class TurmaDaoImpl implements TurmaDao {
 					Statement.RETURN_GENERATED_KEYS);
 
 			st.setString(1, obj.getNome());
-			st.setDate(2, new java.sql.Date(obj.getHorario().getTime()));
+			st.setString(2, obj.getHorario());
 
 			int rowsAffected = st.executeUpdate();
 
@@ -120,7 +120,7 @@ public class TurmaDaoImpl implements TurmaDao {
 				Turma obj = new Turma();
 				obj.setId(rs.getInt("id"));
 				obj.setNome(rs.getString("nome"));
-				obj.setHorario(rs.getTime("horario"));
+				obj.setHorario(rs.getString("horario"));
 				list.add(obj);
 			}
 			return list;

@@ -3,17 +3,23 @@ package lpoo.estudiodanca.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import lpoo.estudiodanca.modelo.db.DbException;
+import lpoo.estudiodanca.modelo.services.TurmaService;
 import lpoo.estudiodanca.modelo.vo.Turma;
 import lpoo.estudiodanca.visao.gui.util.Constraints;
+import lpoo.estudiodanca.visao.gui.util.Utils;
 
 public class TurmaFormController implements Initializable {
 
 	private Turma  entity;
+	
+	private TurmaService service;
 	
 	@FXML
 	private TextField txtId;
@@ -37,14 +43,40 @@ public class TurmaFormController implements Initializable {
 		this.entity = entity;
 	}
 	
-	@FXML
-	public void onBtnSaveAction() {
-		System.out.println("oiii");
+	public void setTurmaService(TurmaService service) {
+		this.service = service;
 	}
 	
 	@FXML
-	public void onBtnCancelAction() {
-		System.out.println("ola");
+	public void onBtnSaveAction(ActionEvent event) {
+		if(entity == null) {
+			throw new IllegalStateException("Entity was null");
+		}
+		if(service == null) {
+			throw new IllegalStateException("SErvice was null");
+		}
+		try {
+			entity = getFormData();
+			service.saveOrUpdate(entity);
+			Utils.currentStage(event).close();
+		}catch (DbException e) {
+			System.out.println("Erro salvando objeto " + e);
+		}
+	}
+	
+	private Turma getFormData() {
+		Turma obj = new Turma();
+		
+		obj.setId(Utils.tryParseToInt(txtId.getText()));
+		obj.setNome(txtName.getText());
+		obj.setHorario(txtHorario.getText());
+		
+		return obj;
+	}
+
+	@FXML
+	public void onBtnCancelAction(ActionEvent event) {
+		Utils.currentStage(event).close();
 	}
 	
 	@Override
@@ -65,7 +97,7 @@ public class TurmaFormController implements Initializable {
 		
 		txtId.setText(String.valueOf(entity.getId()));
 		txtName.setText(entity.getNome());
-		txtHorario.setText(String.valueOf(entity.getHorario()));
+		txtHorario.setText(entity.getHorario());
 	}
 
 }

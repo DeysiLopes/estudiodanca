@@ -84,6 +84,7 @@ public class TurmaListController implements Initializable{
 			
 			TurmaFormController  controller = loader.getController();
 			controller.setTurma(obj);
+			controller.setTurmaService(new TurmaService());
 			controller.updateFormData();
 			
 			Stage dialogStage = new Stage();
