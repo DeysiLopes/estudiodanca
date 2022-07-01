@@ -1,8 +1,11 @@
 package lpoo.estudiodanca.controller;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import jakarta.xml.bind.Marshaller.Listener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,6 +15,7 @@ import javafx.scene.control.TextField;
 import lpoo.estudiodanca.modelo.db.DbException;
 import lpoo.estudiodanca.modelo.services.TurmaService;
 import lpoo.estudiodanca.modelo.vo.Turma;
+import lpoo.estudiodanca.visao.gui.listeners.DataChangeListener;
 import lpoo.estudiodanca.visao.gui.util.Constraints;
 import lpoo.estudiodanca.visao.gui.util.Utils;
 
@@ -20,6 +24,8 @@ public class TurmaFormController implements Initializable {
 	private Turma  entity;
 	
 	private TurmaService service;
+	
+	private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
 	
 	@FXML
 	private TextField txtId;
@@ -47,6 +53,10 @@ public class TurmaFormController implements Initializable {
 		this.service = service;
 	}
 	
+	public void subscribeDataChangeListener(DataChangeListener listener) {
+		dataChangeListeners.add(listener);
+	}
+	
 	@FXML
 	public void onBtnSaveAction(ActionEvent event) {
 		if(entity == null) {
@@ -58,12 +68,20 @@ public class TurmaFormController implements Initializable {
 		try {
 			entity = getFormData();
 			service.saveOrUpdate(entity);
+			notifyDatachageListeners();
 			Utils.currentStage(event).close();
 		}catch (DbException e) {
 			System.out.println("Erro salvando objeto " + e);
 		}
 	}
 	
+	private void notifyDatachageListeners() {
+		for(DataChangeListener listerner : dataChangeListeners) {
+			listerner.onDataChanged();
+		}
+		
+	}
+
 	private Turma getFormData() {
 		Turma obj = new Turma();
 		

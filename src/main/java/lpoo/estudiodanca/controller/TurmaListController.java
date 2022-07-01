@@ -24,9 +24,10 @@ import lpoo.estudiodanca.modelo.db.DbException;
 import lpoo.estudiodanca.modelo.services.TurmaService;
 import lpoo.estudiodanca.modelo.vo.Turma;
 import lpoo.estudiodanca.principal.Main;
+import lpoo.estudiodanca.visao.gui.listeners.DataChangeListener;
 import lpoo.estudiodanca.visao.gui.util.Utils;
 
-public class TurmaListController implements Initializable{
+public class TurmaListController implements Initializable, DataChangeListener {
 	
 	private TurmaService service;
 	
@@ -85,6 +86,7 @@ public class TurmaListController implements Initializable{
 			TurmaFormController  controller = loader.getController();
 			controller.setTurma(obj);
 			controller.setTurmaService(new TurmaService());
+			controller.subscribeDataChangeListener(this);
 			controller.updateFormData();
 			
 			Stage dialogStage = new Stage();
@@ -94,6 +96,12 @@ public class TurmaListController implements Initializable{
 			dialogStage.initOwner(parentStage);
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.showAndWait();
+		
+	}
+
+	@Override
+	public void onDataChanged() {
+		updateTableView();
 		
 	}
 	
