@@ -47,7 +47,8 @@ public class TurmaListController implements Initializable{
 	@FXML
 	public void onBtnNewAction(ActionEvent event) throws IOException {
 		Stage parentStage = Utils.currentStage(event);
-		createDialogForm("/lpoo/estudiodanca/visao/gui/TurmaForm.fxml", parentStage);
+		Turma obj = new Turma();
+		createDialogForm(obj, "/lpoo/estudiodanca/visao/gui/TurmaForm.fxml", parentStage);
 	}
 	
 	public void setTurmaService(TurmaService service) {
@@ -77,9 +78,13 @@ public class TurmaListController implements Initializable{
 		tableViewTurma.setItems(obsList);
 	}
 	
-	private void createDialogForm(String absoluteName,Stage parentStage) throws IOException {
+	private void createDialogForm(Turma obj, String absoluteName,Stage parentStage) throws IOException {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 			Pane pane = loader.load();
+			
+			TurmaFormController  controller = loader.getController();
+			controller.setTurma(obj);
+			controller.updateFormData();
 			
 			Stage dialogStage = new Stage();
 			dialogStage.setTitle("Entre com os dados da Turma");

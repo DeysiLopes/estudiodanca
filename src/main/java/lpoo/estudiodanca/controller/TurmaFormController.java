@@ -8,10 +8,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import lpoo.estudiodanca.modelo.vo.Turma;
 import lpoo.estudiodanca.visao.gui.util.Constraints;
 
 public class TurmaFormController implements Initializable {
 
+	private Turma  entity;
+	
 	@FXML
 	private TextField txtId;
 	
@@ -29,6 +32,10 @@ public class TurmaFormController implements Initializable {
 	
 	@FXML
 	private Button btnCancel;
+	
+	public void setTurma(Turma entity) {
+		this.entity = entity;
+	}
 	
 	@FXML
 	public void onBtnSaveAction() {
@@ -49,6 +56,16 @@ public class TurmaFormController implements Initializable {
 		Constraints.setTextFieldInteger(txtId);
 		Constraints.setTextFieldMaxLength(txtName, 30);
 		Constraints.setTextFieldMaxLength(txtHorario, 30);
+	}
+	
+	public void updateFormData() {
+		if(entity == null) {
+			throw new IllegalStateException("Entity was null");
+		}
+		
+		txtId.setText(String.valueOf(entity.getId()));
+		txtName.setText(entity.getNome());
+		txtHorario.setText(String.valueOf(entity.getHorario()));
 	}
 
 }
