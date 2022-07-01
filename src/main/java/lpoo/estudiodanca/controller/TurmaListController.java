@@ -20,7 +20,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import lpoo.estudiodanca.modelo.db.DbException;
 import lpoo.estudiodanca.modelo.services.TurmaService;
 import lpoo.estudiodanca.modelo.vo.Turma;
 import lpoo.estudiodanca.principal.Main;

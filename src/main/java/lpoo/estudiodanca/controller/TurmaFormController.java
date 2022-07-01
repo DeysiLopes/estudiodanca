@@ -3,15 +3,17 @@ package lpoo.estudiodanca.controller;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 
-import jakarta.xml.bind.Marshaller.Listener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import lpoo.estudiodanca.exceptions.ValidationExcpetion;
 import lpoo.estudiodanca.modelo.db.DbException;
 import lpoo.estudiodanca.modelo.services.TurmaService;
 import lpoo.estudiodanca.modelo.vo.Turma;
@@ -70,6 +72,8 @@ public class TurmaFormController implements Initializable {
 			service.saveOrUpdate(entity);
 			notifyDatachageListeners();
 			Utils.currentStage(event).close();
+		}catch (ValidationExcpetion e) {
+			setErrorMessege(e.getErrors());
 		}catch (DbException e) {
 			System.out.println("Erro salvando objeto " + e);
 		}
@@ -85,9 +89,23 @@ public class TurmaFormController implements Initializable {
 	private Turma getFormData() {
 		Turma obj = new Turma();
 		
+		ValidationExcpetion excpetion = new ValidationExcpetion("Validação com erro");
+		
+		
 		obj.setId(Utils.tryParseToInt(txtId.getText()));
+		if(txtName.getText() == null || txtName.getText().trim().equals("")) {
+			excpetion.addError("nome", "Este campo não estar vazio!!");
+		}
+		if(txtHorario.getText() == null || txtHorario.getText().trim().equals("")) {
+			excpetion.addError("horario", "Este campo não estar vazio!!");
+		}
+		
 		obj.setNome(txtName.getText());
 		obj.setHorario(txtHorario.getText());
+		
+		if(excpetion.getErrors().size() > 0) {
+			throw excpetion;
+		}
 		
 		return obj;
 	}
@@ -116,6 +134,17 @@ public class TurmaFormController implements Initializable {
 		txtId.setText(String.valueOf(entity.getId()));
 		txtName.setText(entity.getNome());
 		txtHorario.setText(entity.getHorario());
+	}
+	
+	private void setErrorMessege(Map<String, String> errors) {
+		Set<String> fields = errors.keySet();
+		
+		if(fields.contains("nome")) {
+			labelErrorName.setText(errors.get("nome"));
+		}
+		if(fields.contains("horario")) {
+			labelErrorName.setText(errors.get("horario"));
+		}
 	}
 
 }
